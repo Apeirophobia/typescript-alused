@@ -1,3 +1,7 @@
+
+// Vastutuste kett on käitumuslik muster, mis lubab kasutajal saata päringuid mööda käsitlejate ketisse. 
+// Päringu kätte saamisel iga käsitleja valib, kas ta töötleb seda päringut või saadab seda mööda ketti edasi.
+
 // Põhi ketta sidumiseks ning päringute käsitlemiseks
 interface KliendiTugi<Päring = string, Tulemus = string> {
     määraJärgmise(KliendiTugi: KliendiTugi<Päring, Tulemus>): KliendiTugi<Päring, Tulemus>; // funktsioon, parameetrid: klienditugi, tagastab: klienditugi
