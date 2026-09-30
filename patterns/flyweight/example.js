@@ -58,7 +58,7 @@ class Mets {
 }
 const canvas = document.getElementById("canvas");
 const mets = new Mets();
-mets.istutaPuu(50, 100, "Tamm", "Roheline", "tamm.png");
-mets.istutaPuu(100, 150, "Kask", "HeleRoheline", "kask.png");
-mets.istutaPuu(150, 300, "Jaapani Kirss", "Roosa", "sakura.png");
+//mets.istutaPuu(50, 100, "Tamm", "Roheline", "tamm.png");
+//mets.istutaPuu(100, 150, "Kask", "HeleRoheline", "kask.png");
+mets.istutaPuu(100, 100, "Jaapani Kirss", "Roosa", "sakura.png");
 mets.drawCanvas(canvas);
