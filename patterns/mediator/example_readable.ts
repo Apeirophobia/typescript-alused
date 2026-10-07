@@ -23,19 +23,17 @@ class LennujuhtimisTorn implements Lennujuhtija {
 
         if (event === "MAANDUMINE") {
             console.log("Lennujuhtimistorn: luba palutud")
-            this.kaubaLennuk.hoiaAsukohta();
+            this.kaubaLennuk.eemalduRajalt();
             this.reisiLennuk.maandu();
         }
 
 
     }
-
 }
 
-
-class ReisiLennuk {
-    protected lennuJuhtija: LennujuhtimisTorn
-
+class Lennuk {
+    protected lennuJuhtija!: LennujuhtimisTorn
+    
     constructor(lennuJuhtija?: LennujuhtimisTorn) {
         this.lennuJuhtija = lennuJuhtija!;
     }
@@ -43,31 +41,69 @@ class ReisiLennuk {
     public seaLennujuhtija(lennuJuhtija: LennujuhtimisTorn) {
         this.lennuJuhtija = lennuJuhtija;
     }
-    public hoiaAsukohta() {
-
-    }
-
-    public touseOhku() {
-
-    }
 }
 
-class KaubaLennuk {
-    protected lennuJuhtija: LennujuhtimisTorn
 
-    constructor(lennuJuhtija?: LennujuhtimisTorn) {
-        this.lennuJuhtija = lennuJuhtija!;
-    }
 
-    public seaLennujuhtija(lennuJuhtija: LennujuhtimisTorn) {
-        this.lennuJuhtija = lennuJuhtija;
-    }
+class ReisiLennuk extends Lennuk {
 
-    public hoiaAsukohta() {
 
-    }
 
-    public touseOhku() {
+    public kusiOhkuLuba () {
         
+        this.lennuJuhtija.teavita(this, "TOUS")
+    }
+    public hoiaAsukohta() {
+
+    }
+
+    public touseOhku() {
+        console.log("Reisilennuk touseb ohku")
+    }
+    public eemalduRajalt() {
+        console.log("Reisilennuk emmaldub ohkutousurajalt")
+    }
+    public maandu() {
+
     }
 }
+
+class KaubaLennuk extends Lennuk {
+
+    public kusiMaandumisLuba(): void {
+        console.log("Kaubalennuk kysib maandumisluba")
+        this.lennuJuhtija.teavita(this, "LUBA_MAANDUM")
+    }
+
+    public hoiaAsukohta() {
+        console.log("Kaubalennuk on paigal")
+    }
+
+    
+    public touseOhku() {
+
+    }   
+
+    public eemalduRajalt() {
+
+    }
+    public maandu() {
+        console.log("Kaubalennuk maandub ")
+    }
+}
+
+
+const reisiLennuk = new ReisiLennuk();
+const kaubaLennuk = new KaubaLennuk();
+
+
+const ATC = new LennujuhtimisTorn(reisiLennuk, kaubaLennuk);
+
+
+
+reisiLennuk.seaLennujuhtija(ATC);
+kaubaLennuk.seaLennujuhtija(ATC);
+
+reisiLennuk.kusiOhkuLuba();
+
+kaubaLennuk.kusiMaandumisLuba();
